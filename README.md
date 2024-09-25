@@ -14,7 +14,6 @@ The systemC libraries are directly downloaded from [Accellera](https://www.accel
 
 ```
 docker build -f ubuntu.dockerfile -t systemc:2.3.3-ubuntu .
-
 ```
 
 or
@@ -23,6 +22,14 @@ or
 docker build -f alpine.dockerfile -t systemc:2.3.3-alpine .
 
 ```
+```
+// added gtkwave
+sudo docker build -f ubuntu.dockerfile -t systemc-2.3.3_ubuntu:0.1 .
+
+// added gtkwave and verilator
+sudo docker build -f ubuntu-verilator-gtkwave.dockerfile -t systemc-2.3.3_ubuntu-verilator-gtkwave:0.2 .
+```
+
 check available Docker images:
 ```
 sudo docker images
@@ -33,11 +40,30 @@ sudo docker images
 ```
 sudo docker run -ti --rm -v "$(pwd)"/srcfiles/:/usr/srcfile/ systemc:2.3.3-ubuntu
 ```
-
 or
 ```
 sudo docker run -ti --rm -v "$(pwd)"/srcfiles/:/usr/srcfile/ systemc:2.3.3-alpine
 ```
+
+When using container with gtkwave+verilator installed, these are the commands:
+```
+xhost +local:docker
+sudo docker run -ti --rm \
+                -e DISPLAY=$DISPLAY \
+                -v /tmp/.X11-unix:/tmp/.X11-unix \
+                -v "$(pwd)"/srcfiles/:/usr/srcfile/ systemc-2.3.3_ubuntu:0.1
+                
+or
+```
+
+```
+sudo docker run -ti --rm \
+                -e DISPLAY=$DISPLAY \
+                -v /tmp/.X11-unix:/tmp/.X11-unix \
+                -v "$(pwd)"/srcfiles/:/usr/srcfile/ systemc-2.3.3_ubuntu-verilator-gtkwave:0.2
+```
+
+
 
 # Important locations
 
