@@ -1,0 +1,1 @@
+g++ -o example example.cpp -I $SYSTEMC_HOME/include -L $SYSTEMC_HOME/lib-linux64 -lsystemc -lm
